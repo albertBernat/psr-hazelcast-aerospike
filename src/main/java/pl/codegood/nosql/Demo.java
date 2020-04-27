@@ -1,0 +1,147 @@
+package pl.codegood.nosql;
+
+import pl.codegood.nosql.model.AnimalEntity;
+import pl.codegood.nosql.model.EmployeeEntity;
+import pl.codegood.nosql.model.TicketEntity;
+import pl.codegood.nosql.repository.HazelcastRepository;
+import pl.codegood.nosql.repository.ZooRepository;
+import pl.codegood.nosql.view.ZooView;
+
+import java.math.BigDecimal;
+import java.util.concurrent.TimeUnit;
+
+public class Demo {
+    private final long SLEEP_DURATION_IN_SECONDS = 3L;
+
+    private final ZooView zooView;
+    private final ZooRepository<Long, AnimalEntity> animalRepository;
+    private final ZooRepository<Long, TicketEntity> ticketRepository;
+    private final ZooRepository<Long, EmployeeEntity> emplyeeRepository;
+
+    public Demo(ZooView zooView,
+                ZooRepository<Long, AnimalEntity> animalRepository,
+                ZooRepository<Long, TicketEntity> ticketRepository,
+                ZooRepository<Long, EmployeeEntity> emplyeeRepository) {
+        this.zooView = zooView;
+        this.animalRepository = animalRepository;
+        this.ticketRepository = ticketRepository;
+        this.emplyeeRepository = emplyeeRepository;
+    }
+
+    public void animalCrudDemo() throws InterruptedException {
+        zooView.displayOperationTitle("ANIMAL CRUD DEMO");
+        this.getAllEntities("ANIMALS", animalRepository);
+        TimeUnit.SECONDS.sleep(SLEEP_DURATION_IN_SECONDS);
+        this.addAnimal();
+        TimeUnit.SECONDS.sleep(SLEEP_DURATION_IN_SECONDS);
+        this.deleteAnimal();
+        TimeUnit.SECONDS.sleep(SLEEP_DURATION_IN_SECONDS);
+        this.editAnimal();
+        TimeUnit.SECONDS.sleep(SLEEP_DURATION_IN_SECONDS);
+    }
+
+    public void ticketCrudDemo() throws InterruptedException {
+        zooView.displayOperationTitle("TICKET CRUD DEMO");
+        this.getAllEntities("TICKETS", ticketRepository);
+        TimeUnit.SECONDS.sleep(SLEEP_DURATION_IN_SECONDS);
+        this.addTicket();
+        TimeUnit.SECONDS.sleep(SLEEP_DURATION_IN_SECONDS);
+        this.deleteTicket();
+        TimeUnit.SECONDS.sleep(SLEEP_DURATION_IN_SECONDS);
+        this.editTicket();
+        TimeUnit.SECONDS.sleep(SLEEP_DURATION_IN_SECONDS);
+    }
+
+    public void employeeCrudDemo() throws InterruptedException {
+        zooView.displayOperationTitle("EMPLOYEE CRUD DEMO");
+        this.getAllEntities("EMPLOYEES", emplyeeRepository);
+        TimeUnit.SECONDS.sleep(SLEEP_DURATION_IN_SECONDS);
+        this.addEmployee();
+        TimeUnit.SECONDS.sleep(SLEEP_DURATION_IN_SECONDS);
+        this.deleteEmployee();
+        TimeUnit.SECONDS.sleep(SLEEP_DURATION_IN_SECONDS);
+        this.editEmployee();
+        TimeUnit.SECONDS.sleep(SLEEP_DURATION_IN_SECONDS);
+    }
+
+    public void predicatesDemo() throws InterruptedException {
+        zooView.displayOperationTitle("PREDICATES HAZELCAST DEMO");
+        TimeUnit.SECONDS.sleep(SLEEP_DURATION_IN_SECONDS);
+
+        zooView.displayOperationTitle("ALL ALIVE ANIMALS");
+        zooView.displayCollection(this.animalRepository.getAllAliveAnimals());
+        TimeUnit.SECONDS.sleep(SLEEP_DURATION_IN_SECONDS);
+
+        zooView.displayOperationTitle("ALL CATS");
+        zooView.displayCollection(this.animalRepository.getAllCats());
+        TimeUnit.SECONDS.sleep(SLEEP_DURATION_IN_SECONDS);
+    }
+
+    private void getAllEntities(String entityName, ZooRepository repository) {
+        zooView.displayOperationTitle("ALL " + entityName.toUpperCase());
+        zooView.displayMap(repository.findAll());
+    }
+
+    private void addAnimal() {
+        zooView.displayOperationTitle("ADDING ANIMAL");
+        animalRepository.save(new AnimalEntity());
+        zooView.displayMap(animalRepository.findAll());
+    }
+
+    private void addTicket() {
+        zooView.displayOperationTitle("ADDING TICKET");
+        ticketRepository.save(new TicketEntity());
+        zooView.displayMap(ticketRepository.findAll());    }
+
+    private void addEmployee() {
+        zooView.displayOperationTitle("ADDING EMPLOYEE");
+        emplyeeRepository.save(new EmployeeEntity());
+        zooView.displayMap(emplyeeRepository.findAll());;
+    }
+
+    private void deleteAnimal() {
+        zooView.displayOperationTitle("DELETING ANIMAL WITH ID 1");
+        animalRepository.deleteByKey(1L);
+        zooView.displayMap(animalRepository.findAll());
+    }
+
+    private void deleteTicket() {
+        zooView.displayOperationTitle("DELETING TICKIET WITH ID 1");
+        ticketRepository.deleteByKey(1L);
+        zooView.displayMap(ticketRepository.findAll());
+    }
+
+    private void deleteEmployee() {
+        zooView.displayOperationTitle("DELETING EMPLOYEE WITH ID 1");
+        emplyeeRepository.deleteByKey(1L);
+        zooView.displayMap(emplyeeRepository.findAll());
+    }
+
+    private void editAnimal() {
+        zooView.displayOperationTitle("EDITNG NAME OF ENTITY ANIMAL WITH ID 2, AFTER EDIT");
+        AnimalEntity foundAnimal = animalRepository.findByKey(2L);
+        foundAnimal.setName("NEW NAME");
+        animalRepository.deleteByKey(2L);
+        animalRepository.save(2L, foundAnimal);
+        zooView.displayMap(animalRepository.findAll());
+    }
+
+    private void editTicket() {
+        zooView.displayOperationTitle("EDITNG PRICE OF ENTITY TICKET WITH ID 2, AFTER EDIT");
+        TicketEntity foundTicket = ticketRepository.findByKey(2L);
+        foundTicket.setPrice(new BigDecimal(20));
+        ticketRepository.deleteByKey(2L);
+        ticketRepository.save(2L, foundTicket);
+        zooView.displayMap(ticketRepository.findAll());
+    }
+
+    private void editEmployee() {
+        zooView.displayOperationTitle("EDITNG NAME OF ENTITY TICKET WITH ID 2, AFTER EDIT");
+        EmployeeEntity foundEmployee = emplyeeRepository.findByKey(2L);
+        foundEmployee.setName("NEW NAME");
+        emplyeeRepository.deleteByKey(2L);
+        emplyeeRepository.save(2L, foundEmployee);
+        zooView.displayMap(emplyeeRepository.findAll());
+    }
+}
+
