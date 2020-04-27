@@ -3,7 +3,6 @@ package pl.codegood.nosql;
 import pl.codegood.nosql.model.AnimalEntity;
 import pl.codegood.nosql.model.EmployeeEntity;
 import pl.codegood.nosql.model.TicketEntity;
-import pl.codegood.nosql.repository.HazelcastRepository;
 import pl.codegood.nosql.repository.ZooRepository;
 import pl.codegood.nosql.view.ZooView;
 
@@ -65,7 +64,7 @@ public class Demo {
     }
 
     public void predicatesDemo() throws InterruptedException {
-        zooView.displayOperationTitle("PREDICATES HAZELCAST DEMO");
+        zooView.displayOperationTitle("PREDICATES DEMO");
         TimeUnit.SECONDS.sleep(SLEEP_DURATION_IN_SECONDS);
 
         zooView.displayOperationTitle("ALL ALIVE ANIMALS");

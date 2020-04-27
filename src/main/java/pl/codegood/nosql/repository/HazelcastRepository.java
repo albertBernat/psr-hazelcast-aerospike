@@ -7,7 +7,6 @@ import com.hazelcast.query.Predicates;
 import pl.codegood.nosql.model.AnimalEntity;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Map;
 
 public class HazelcastRepository<MODEL> implements ZooRepository<Long, MODEL> {

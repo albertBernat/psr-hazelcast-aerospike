@@ -4,10 +4,6 @@ import com.aerospike.client.AerospikeClient;
 import com.aerospike.client.Bin;
 import com.aerospike.client.Key;
 import com.aerospike.client.Record;
-import com.aerospike.client.query.Filter;
-import com.aerospike.client.query.Statement;
-import com.hazelcast.map.IMap;
-import com.hazelcast.query.Predicates;
 import pl.codegood.nosql.model.AnimalEntity;
 
 import java.util.Collection;
@@ -91,6 +87,6 @@ public class AerospikeRepository<MODEL> implements ZooRepository<Long, MODEL> {
     public Collection<AnimalEntity> getAllCats() {
         AerospikeRepository<AnimalEntity> animalRepository = new AerospikeRepository<>(clientInstance, mapName);
         Map<Long, AnimalEntity> allAnimals = animalRepository.findAll();
-        return  allAnimals.values().stream().filter(animalEntity -> "Cat".equals(animalEntity.getRace())).collect(Collectors.toList());
+        return allAnimals.values().stream().filter(animalEntity -> "Cat".equals(animalEntity.getRace())).collect(Collectors.toList());
     }
 }

@@ -24,43 +24,33 @@ public class Application {
     private static final String EMPLOYEES = "employees";
 
     public static void main(String[] args) throws InterruptedException {
-        if (false) {
-            // Create objects to DI
+        ZooRepository<Long, AnimalEntity> animalRepository = null;
+        ZooRepository<Long, TicketEntity> ticketRepository = null;
+        ZooRepository<Long, EmployeeEntity> employeesRepository = null;
+
+        if ("hazelcast".equals(args[0])) {
             HazelcastInstance hazelcastInstance = HazelcastConfig.getHazelcastInstance();
-            ZooRepository<Long, AnimalEntity> animalRepository = new HazelcastRepository<>(hazelcastInstance, ANIMALS);
-            ZooRepository<Long, TicketEntity> ticketRepository = new HazelcastRepository<>(hazelcastInstance, TICKETS);
-            ZooRepository<Long, EmployeeEntity> employeesRepository = new HazelcastRepository<>(hazelcastInstance, EMPLOYEES);
-            Bootstrap hazelcastBootstrap = new ZooBootstrap(animalRepository, ticketRepository, employeesRepository);
-
-            // Load some data
-            hazelcastBootstrap.loadAnimals();
-            hazelcastBootstrap.loadTickets();
-            hazelcastBootstrap.loadEmplyees();
-
-            //Perform demo
-            ZooView zooView = new ZooView();
-            Demo demo = new Demo(zooView,animalRepository, ticketRepository, employeesRepository);
-            demo.animalCrudDemo();
-            demo.ticketCrudDemo();
-            demo.employeeCrudDemo();
-            demo.predicatesDemo();
-
-        } else {
-            AerospikeClient client = AerospikeConfig.getClient();
-            ZooRepository<Long, AnimalEntity> animalRepository = new AerospikeRepository<>(client, "animals");
-            ZooRepository<Long, TicketEntity> ticketRepository = new AerospikeRepository<>(client, "tickets");
-            ZooRepository<Long, EmployeeEntity> employeeRepository = new AerospikeRepository<>(client, "employees");
-            Bootstrap bootstrap = new ZooBootstrap(animalRepository, ticketRepository, employeeRepository);
-            bootstrap.loadEmplyees();
-            bootstrap.loadAnimals();
-            bootstrap.loadTickets();
-            ZooView zooView = new ZooView();
-            Demo demo = new Demo(zooView, animalRepository, ticketRepository, employeeRepository);
-            demo.animalCrudDemo();
-            demo.employeeCrudDemo();
-            demo.ticketCrudDemo();
-            demo.predicatesDemo();
+            animalRepository = new HazelcastRepository<>(hazelcastInstance, ANIMALS);
+            ticketRepository = new HazelcastRepository<>(hazelcastInstance, TICKETS);
+            employeesRepository = new HazelcastRepository<>(hazelcastInstance, EMPLOYEES);
+        } else if ("aerospike".equals(args[0])) {
+            AerospikeClient aerospikeClient = AerospikeConfig.getClient();
+            animalRepository = new AerospikeRepository<>(aerospikeClient, ANIMALS);
+            ticketRepository = new AerospikeRepository<>(aerospikeClient, TICKETS);
+            employeesRepository = new AerospikeRepository<>(aerospikeClient, EMPLOYEES);
         }
+        Bootstrap dataBootstrap = new ZooBootstrap(animalRepository, ticketRepository, employeesRepository);
+        // Load some data
+        dataBootstrap.loadAnimals();
+        dataBootstrap.loadTickets();
+        dataBootstrap.loadEmplyees();
 
+        //Perform demo
+        ZooView zooView = new ZooView();
+        Demo demo = new Demo(zooView, animalRepository, ticketRepository, employeesRepository);
+        demo.animalCrudDemo();
+        demo.ticketCrudDemo();
+        demo.employeeCrudDemo();
+        demo.predicatesDemo();
     }
 }
