@@ -1,2 +1,2 @@
 FROM mongo:latest
-RUN mongod
+CMD ["mongod"]

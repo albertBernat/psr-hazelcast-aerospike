@@ -2,3 +2,5 @@ version: '3'
 services:
     db-mongo:
         build: ./db-mongo
+        ports:
+        - "27017-27019:27017-27019"
