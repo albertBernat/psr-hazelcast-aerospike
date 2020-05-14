@@ -6,6 +6,7 @@ import java.util.Objects;
 
 
 public class AnimalEntity implements Serializable {
+    private Long internalId;
     private String name;
     private String race;
     private LocalDate birthDate;
@@ -13,6 +14,15 @@ public class AnimalEntity implements Serializable {
     private LocationEntity location;
 
     public AnimalEntity(String name, String race, LocalDate birthDate, LocalDate deathDate, LocationEntity location) {
+        this.name = name;
+        this.race = race;
+        this.birthDate = birthDate;
+        this.deathDate = deathDate;
+        this.location = location;
+    }
+
+    public AnimalEntity(Long internalId, String name, String race, LocalDate birthDate, LocalDate deathDate, LocationEntity location) {
+        this.internalId = internalId;
         this.name = name;
         this.race = race;
         this.birthDate = birthDate;
@@ -47,12 +57,21 @@ public class AnimalEntity implements Serializable {
         return location;
     }
 
+    public Long getInternalId() {
+        return internalId;
+    }
+
+    public void setInternalId(Long internalId) {
+        this.internalId = internalId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         AnimalEntity that = (AnimalEntity) o;
-        return Objects.equals(name, that.name) &&
+        return Objects.equals(internalId, that.internalId) &&
+                Objects.equals(name, that.name) &&
                 Objects.equals(race, that.race) &&
                 Objects.equals(birthDate, that.birthDate) &&
                 Objects.equals(deathDate, that.deathDate) &&
@@ -61,13 +80,14 @@ public class AnimalEntity implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, race, birthDate, deathDate, location);
+        return Objects.hash(internalId, name, race, birthDate, deathDate, location);
     }
 
     @Override
     public String toString() {
         return "AnimalEntity{" +
-                "name='" + name + '\'' +
+                "internalId=" + internalId +
+                ", name='" + name + '\'' +
                 ", race='" + race + '\'' +
                 ", birthDate=" + birthDate +
                 ", deathDate=" + deathDate +

@@ -1,15 +1,15 @@
 package pl.codegood.nosql.initalization;
 
-import pl.codegood.nosql.model.AnimalEntity;
-import pl.codegood.nosql.model.EmployeeEntity;
-import pl.codegood.nosql.model.TicketEntity;
+import com.mongodb.MongoClient;
+import pl.codegood.nosql.config.MongodbConfig;
 import pl.codegood.nosql.repository.RepositoryWrapper;
-import pl.codegood.nosql.repository.ZooRepository;
 
-public class MongodbInitializator implements ClientInitializator{
+public class MongodbInitializator implements ClientInitializator {
 
     @Override
     public RepositoryWrapper createRepositories() {
+        MongoClient client = MongodbConfig.getClient();
+
         return null;
     }
 }

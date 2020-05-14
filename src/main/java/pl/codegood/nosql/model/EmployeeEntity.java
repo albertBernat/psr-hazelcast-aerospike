@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 public class EmployeeEntity implements Serializable {
+    private Long internalId;
     private String name;
     private String familyName;
     private LocalDate workStartDate;
@@ -14,6 +15,15 @@ public class EmployeeEntity implements Serializable {
     private GenderEnum gender;
 
     public EmployeeEntity(String name, String familyName, LocalDate workStartDate, LocalDate workEndDate, GenderEnum gender) {
+        this.name = name;
+        this.familyName = familyName;
+        this.workStartDate = workStartDate;
+        this.workEndDate = workEndDate;
+        this.gender = gender;
+    }
+
+    public EmployeeEntity(Long internalId, String name, String familyName, LocalDate workStartDate, LocalDate workEndDate, GenderEnum gender) {
+        this.internalId = internalId;
         this.name = name;
         this.familyName = familyName;
         this.workStartDate = workStartDate;
@@ -52,7 +62,8 @@ public class EmployeeEntity implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         EmployeeEntity that = (EmployeeEntity) o;
-        return Objects.equals(name, that.name) &&
+        return Objects.equals(internalId, that.internalId) &&
+                Objects.equals(name, that.name) &&
                 Objects.equals(familyName, that.familyName) &&
                 Objects.equals(workStartDate, that.workStartDate) &&
                 Objects.equals(workEndDate, that.workEndDate) &&
@@ -61,13 +72,14 @@ public class EmployeeEntity implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, familyName, workStartDate, workEndDate, gender);
+        return Objects.hash(internalId, name, familyName, workStartDate, workEndDate, gender);
     }
 
     @Override
     public String toString() {
         return "EmployeeEntity{" +
-                "name='" + name + '\'' +
+                "internalId=" + internalId +
+                ", name='" + name + '\'' +
                 ", familyName='" + familyName + '\'' +
                 ", workStartDate=" + workStartDate +
                 ", workEndDate=" + workEndDate +

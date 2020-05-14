@@ -5,15 +5,18 @@ import com.mongodb.MongoClientURI;
 
 public class MongodbConfig {
 
+    private static final String USER = "user";
+    private static final String PASSWORD = "xxx";
+    private static final String HOST = "localhost:27017";
+    private static final String DATABASE = "zoo";
+
     public static MongoClient getClient() {
-        String user = "user";
-        String password = "xxx";
-        String host = "localhost:27017";
-        String database = "zoo";
-
-        String clientURI = "mongodb://" + user + ":" + password + "@" + host + "/" + database;
+        String clientURI = "mongodb://" + USER + ":" + PASSWORD + "@" + HOST + "/" + DATABASE;
         MongoClientURI uri = new MongoClientURI(clientURI);
-
         return new MongoClient(uri);
+    }
+
+    public static String getDatabaseName() {
+        return DATABASE;
     }
 }
