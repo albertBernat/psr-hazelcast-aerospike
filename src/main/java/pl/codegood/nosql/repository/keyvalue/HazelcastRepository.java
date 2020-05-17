@@ -1,4 +1,4 @@
-package pl.codegood.nosql.repository;
+package pl.codegood.nosql.repository.keyvalue;
 
 import com.hazelcast.core.HazelcastInstance;
 import com.hazelcast.flakeidgen.FlakeIdGenerator;
@@ -9,7 +9,7 @@ import pl.codegood.nosql.model.AnimalEntity;
 import java.util.Collection;
 import java.util.Map;
 
-public class HazelcastRepository<MODEL> implements ZooRepository<Long, MODEL> {
+public class HazelcastRepository<MODEL> implements ZooKeyValueRepository<Long, MODEL> {
 
     private final HazelcastInstance clientInstance;
     private final String mapName;

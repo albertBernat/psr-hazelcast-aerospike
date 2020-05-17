@@ -1,11 +1,11 @@
-package pl.codegood.nosql.repository;
+package pl.codegood.nosql.repository.keyvalue;
 
 import pl.codegood.nosql.model.AnimalEntity;
 
 import java.util.Collection;
 import java.util.Map;
 
-public interface ZooRepository<KEY_TYPE, MODEL_CLASS> {
+public interface ZooKeyValueRepository<KEY_TYPE, MODEL_CLASS> {
 
     MODEL_CLASS save(MODEL_CLASS zooEntry);
 

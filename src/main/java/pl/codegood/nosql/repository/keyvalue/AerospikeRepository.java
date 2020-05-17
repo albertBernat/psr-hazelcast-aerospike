@@ -1,4 +1,4 @@
-package pl.codegood.nosql.repository;
+package pl.codegood.nosql.repository.keyvalue;
 
 import com.aerospike.client.AerospikeClient;
 import com.aerospike.client.Bin;
@@ -12,7 +12,7 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-public class AerospikeRepository<MODEL> implements ZooRepository<Long, MODEL> {
+public class AerospikeRepository<MODEL> implements ZooKeyValueRepository<Long, MODEL> {
 
     // default pre created namespace name in aerospike docker image
     private static final String NAMESPACE_NAME = "test";

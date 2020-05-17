@@ -1,26 +1,27 @@
-package pl.codegood.nosql;
+package pl.codegood.nosql.demo.keyvalue;
 
+import pl.codegood.nosql.constatnts.EntitiesConstants;
+import pl.codegood.nosql.demo.Showrun;
 import pl.codegood.nosql.model.AnimalEntity;
 import pl.codegood.nosql.model.EmployeeEntity;
 import pl.codegood.nosql.model.TicketEntity;
-import pl.codegood.nosql.repository.ZooRepository;
+import pl.codegood.nosql.repository.keyvalue.ZooKeyValueRepository;
 import pl.codegood.nosql.view.ZooView;
 
 import java.math.BigDecimal;
 import java.util.concurrent.TimeUnit;
 
-public class Demo {
-    private final long SLEEP_DURATION_IN_SECONDS = 3L;
+public class KeyValueShowrun implements Showrun {
 
     private final ZooView zooView;
-    private final ZooRepository<Long, AnimalEntity> animalRepository;
-    private final ZooRepository<Long, TicketEntity> ticketRepository;
-    private final ZooRepository<Long, EmployeeEntity> emplyeeRepository;
+    private final ZooKeyValueRepository<Long, AnimalEntity> animalRepository;
+    private final ZooKeyValueRepository<Long, TicketEntity> ticketRepository;
+    private final ZooKeyValueRepository<Long, EmployeeEntity> emplyeeRepository;
 
-    public Demo(ZooView zooView,
-                ZooRepository<Long, AnimalEntity> animalRepository,
-                ZooRepository<Long, TicketEntity> ticketRepository,
-                ZooRepository<Long, EmployeeEntity> emplyeeRepository) {
+    public KeyValueShowrun(ZooView zooView,
+                           ZooKeyValueRepository<Long, AnimalEntity> animalRepository,
+                           ZooKeyValueRepository<Long, TicketEntity> ticketRepository,
+                           ZooKeyValueRepository<Long, EmployeeEntity> emplyeeRepository) {
         this.zooView = zooView;
         this.animalRepository = animalRepository;
         this.ticketRepository = ticketRepository;
@@ -30,53 +31,53 @@ public class Demo {
     public void animalCrudDemo() throws InterruptedException {
         zooView.displayOperationTitle("ANIMAL CRUD DEMO");
         this.getAllEntities("ANIMALS", animalRepository);
-        TimeUnit.SECONDS.sleep(SLEEP_DURATION_IN_SECONDS);
+        TimeUnit.SECONDS.sleep(EntitiesConstants.SLEEP_DURATION_IN_SECONDS);
         this.addAnimal();
-        TimeUnit.SECONDS.sleep(SLEEP_DURATION_IN_SECONDS);
+        TimeUnit.SECONDS.sleep(EntitiesConstants.SLEEP_DURATION_IN_SECONDS);
         this.deleteAnimal();
-        TimeUnit.SECONDS.sleep(SLEEP_DURATION_IN_SECONDS);
+        TimeUnit.SECONDS.sleep(EntitiesConstants.SLEEP_DURATION_IN_SECONDS);
         this.editAnimal();
-        TimeUnit.SECONDS.sleep(SLEEP_DURATION_IN_SECONDS);
+        TimeUnit.SECONDS.sleep(EntitiesConstants.SLEEP_DURATION_IN_SECONDS);
     }
 
     public void ticketCrudDemo() throws InterruptedException {
         zooView.displayOperationTitle("TICKET CRUD DEMO");
         this.getAllEntities("TICKETS", ticketRepository);
-        TimeUnit.SECONDS.sleep(SLEEP_DURATION_IN_SECONDS);
+        TimeUnit.SECONDS.sleep(EntitiesConstants.SLEEP_DURATION_IN_SECONDS);
         this.addTicket();
-        TimeUnit.SECONDS.sleep(SLEEP_DURATION_IN_SECONDS);
+        TimeUnit.SECONDS.sleep(EntitiesConstants.SLEEP_DURATION_IN_SECONDS);
         this.deleteTicket();
-        TimeUnit.SECONDS.sleep(SLEEP_DURATION_IN_SECONDS);
+        TimeUnit.SECONDS.sleep(EntitiesConstants.SLEEP_DURATION_IN_SECONDS);
         this.editTicket();
-        TimeUnit.SECONDS.sleep(SLEEP_DURATION_IN_SECONDS);
+        TimeUnit.SECONDS.sleep(EntitiesConstants.SLEEP_DURATION_IN_SECONDS);
     }
 
     public void employeeCrudDemo() throws InterruptedException {
         zooView.displayOperationTitle("EMPLOYEE CRUD DEMO");
         this.getAllEntities("EMPLOYEES", emplyeeRepository);
-        TimeUnit.SECONDS.sleep(SLEEP_DURATION_IN_SECONDS);
+        TimeUnit.SECONDS.sleep(EntitiesConstants.SLEEP_DURATION_IN_SECONDS);
         this.addEmployee();
-        TimeUnit.SECONDS.sleep(SLEEP_DURATION_IN_SECONDS);
+        TimeUnit.SECONDS.sleep(EntitiesConstants.SLEEP_DURATION_IN_SECONDS);
         this.deleteEmployee();
-        TimeUnit.SECONDS.sleep(SLEEP_DURATION_IN_SECONDS);
+        TimeUnit.SECONDS.sleep(EntitiesConstants.SLEEP_DURATION_IN_SECONDS);
         this.editEmployee();
-        TimeUnit.SECONDS.sleep(SLEEP_DURATION_IN_SECONDS);
+        TimeUnit.SECONDS.sleep(EntitiesConstants.SLEEP_DURATION_IN_SECONDS);
     }
 
     public void predicatesDemo() throws InterruptedException {
         zooView.displayOperationTitle("PREDICATES DEMO");
-        TimeUnit.SECONDS.sleep(SLEEP_DURATION_IN_SECONDS);
+        TimeUnit.SECONDS.sleep(EntitiesConstants.SLEEP_DURATION_IN_SECONDS);
 
         zooView.displayOperationTitle("ALL ALIVE ANIMALS");
         zooView.displayCollection(this.animalRepository.getAllAliveAnimals());
-        TimeUnit.SECONDS.sleep(SLEEP_DURATION_IN_SECONDS);
+        TimeUnit.SECONDS.sleep(EntitiesConstants.SLEEP_DURATION_IN_SECONDS);
 
         zooView.displayOperationTitle("ALL CATS");
         zooView.displayCollection(this.animalRepository.getAllCats());
-        TimeUnit.SECONDS.sleep(SLEEP_DURATION_IN_SECONDS);
+        TimeUnit.SECONDS.sleep(EntitiesConstants.SLEEP_DURATION_IN_SECONDS);
     }
 
-    private void getAllEntities(String entityName, ZooRepository repository) {
+    private void getAllEntities(String entityName, ZooKeyValueRepository repository) {
         zooView.displayOperationTitle("ALL " + entityName.toUpperCase());
         zooView.displayMap(repository.findAll());
     }
