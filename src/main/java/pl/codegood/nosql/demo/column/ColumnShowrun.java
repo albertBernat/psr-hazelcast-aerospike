@@ -3,14 +3,18 @@ package pl.codegood.nosql.demo.column;
 import pl.codegood.nosql.constatnts.EntitiesConstants;
 import pl.codegood.nosql.demo.Showrun;
 import pl.codegood.nosql.model.AnimalEntity;
+import pl.codegood.nosql.model.EmployeeEntity;
 import pl.codegood.nosql.model.TicketEntity;
+import pl.codegood.nosql.model.enums.GenderEnum;
 import pl.codegood.nosql.model.enums.TicketTypeEnum;
 import pl.codegood.nosql.repository.column.CassandraAnimalRepository;
+import pl.codegood.nosql.repository.column.CassandraEmployeeRepository;
 import pl.codegood.nosql.repository.column.CassandraTicketRepository;
 import pl.codegood.nosql.repository.column.ZooColumnRepository;
 import pl.codegood.nosql.view.ZooView;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.concurrent.TimeUnit;
 
@@ -19,11 +23,13 @@ public class ColumnShowrun implements Showrun {
     private final ZooView zooView;
     private final CassandraAnimalRepository animalRepository;
     private final CassandraTicketRepository ticketRepository;
+    private final CassandraEmployeeRepository emplyeeRepository;
 
-    public ColumnShowrun(ZooView zooView, CassandraAnimalRepository animalRepository, CassandraTicketRepository ticketRepository) {
+    public ColumnShowrun(ZooView zooView, CassandraAnimalRepository animalRepository, CassandraTicketRepository ticketRepository, CassandraEmployeeRepository emplyeeRepository) {
         this.zooView = zooView;
         this.animalRepository = animalRepository;
         this.ticketRepository = ticketRepository;
+        this.emplyeeRepository = emplyeeRepository;
     }
 
     @Override
@@ -113,6 +119,41 @@ public class ColumnShowrun implements Showrun {
 
     @Override
     public void employeeCrudDemo() throws InterruptedException {
+        zooView.displayOperationTitle("EMPLOYEE CRUD DEMO");
+        this.getAllEntities("EMPLOYEES", emplyeeRepository);
+        TimeUnit.SECONDS.sleep(EntitiesConstants.SLEEP_DURATION_IN_SECONDS);
+        this.addEmployee();
+        TimeUnit.SECONDS.sleep(EntitiesConstants.SLEEP_DURATION_IN_SECONDS);
+        this.deleteEmployee();
+        TimeUnit.SECONDS.sleep(EntitiesConstants.SLEEP_DURATION_IN_SECONDS);
+        this.editEmployee();
+        TimeUnit.SECONDS.sleep(EntitiesConstants.SLEEP_DURATION_IN_SECONDS);
 
+    }
+
+    private void editEmployee() {
+        zooView.displayOperationTitle("EDITNG NAME OF ENTITY TICKET WITH ID 2, AFTER EDIT");
+        EmployeeEntity foundEmployee = emplyeeRepository.findByKey(2);
+        foundEmployee.setName("NEW NAME");
+        emplyeeRepository.deleteByKey(2);
+        emplyeeRepository.save(foundEmployee);
+        zooView.displayCollection(emplyeeRepository.findAll());
+    }
+
+    private void deleteEmployee() {
+        zooView.displayOperationTitle("DELETING EMPLOYEE WITH ID 1");
+        emplyeeRepository.deleteByKey(1);
+        zooView.displayCollection(emplyeeRepository.findAll());
+    }
+
+    private void addEmployee() {
+        zooView.displayOperationTitle("ADDING EMPLOYEE");
+        EmployeeEntity employeeEntity = new EmployeeEntity();
+        employeeEntity.setInternalId(123L);
+        employeeEntity.setGender(GenderEnum.MALE);
+        employeeEntity.setWorkEndDate(LocalDate.now());
+        employeeEntity.setWorkStartDate(LocalDate.now());
+        emplyeeRepository.save(employeeEntity);
+        zooView.displayCollection(emplyeeRepository.findAll());
     }
 }

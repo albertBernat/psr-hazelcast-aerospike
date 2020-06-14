@@ -4,6 +4,7 @@ import pl.codegood.nosql.model.enums.GenderEnum;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 public class EmployeeEntity implements Serializable {
@@ -53,6 +54,30 @@ public class EmployeeEntity implements Serializable {
         return gender;
     }
 
+    public Long getInternalId() {
+        return internalId;
+    }
+
+    public void setInternalId(Long internalId) {
+        this.internalId = internalId;
+    }
+
+    public void setFamilyName(String familyName) {
+        this.familyName = familyName;
+    }
+
+    public void setWorkStartDate(LocalDate workStartDate) {
+        this.workStartDate = workStartDate;
+    }
+
+    public void setWorkEndDate(LocalDate workEndDate) {
+        this.workEndDate = workEndDate;
+    }
+
+    public void setGender(GenderEnum gender) {
+        this.gender = gender;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -85,5 +110,13 @@ public class EmployeeEntity implements Serializable {
                 ", workEndDate=" + workEndDate +
                 ", gender=" + gender +
                 '}';
+    }
+
+    public String toStringInsertStatement() {
+        return internalId + ",'" + name + "', '" + familyName + "'," + parseDate(workStartDate) +  ", " + parseDate(workEndDate) +", '" + gender.toString() + "'";
+    }
+
+    public String parseDate(LocalDate date) {
+        return date == null ? "null":"'"+date.format(DateTimeFormatter.BASIC_ISO_DATE)+"'";
     }
 }
