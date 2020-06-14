@@ -11,4 +11,8 @@ services:
             - MONGO_INITDB_DATABASE=zoo
         volumes:
             - ./db-mongo/create_user.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
-
+    db-cassandra:
+        image: cassandra:latest
+        container_name: "cassandra"
+        ports:
+            - "9042:9042"

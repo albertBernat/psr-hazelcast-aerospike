@@ -94,4 +94,8 @@ public class AnimalEntity implements Serializable {
                 ", location=" + location +
                 '}';
     }
+
+    public String toStringInsertStatement() {
+        return internalId + ", " + "'" + name + "'" + ", " + "'" + race + "'" + ", " + "'" + birthDate + "'" + ", " + "'" + deathDate + "'";
+    }
 }

@@ -2,7 +2,7 @@ package pl.codegood.nosql.demo.document;
 
 import com.google.gson.Gson;
 import com.mongodb.MongoClient;
-import com.softmotions.ejdb2.EJDB2;
+//import com.softmotions.ejdb2.EJDB2;
 import pl.codegood.nosql.bootstrap.DocumentBootstrap;
 import pl.codegood.nosql.config.EJDBConfig;
 import pl.codegood.nosql.config.MongodbConfig;
@@ -12,7 +12,7 @@ import pl.codegood.nosql.model.AnimalEntity;
 import pl.codegood.nosql.model.EmployeeEntity;
 import pl.codegood.nosql.model.TicketEntity;
 import pl.codegood.nosql.repository.document.DocumentRepositoryWrapper;
-import pl.codegood.nosql.repository.document.EjdbRepository;
+//import pl.codegood.nosql.repository.document.EjdbRepository;
 import pl.codegood.nosql.repository.document.MongodbRepository;
 import pl.codegood.nosql.repository.document.ZooDocumentRepository;
 import pl.codegood.nosql.view.ZooView;
@@ -52,12 +52,13 @@ public class DocumentDemo implements ApplicationAlgorithm {
             documentRepositoryWrapper.setTicketRepository(new MongodbRepository<>(mongoClient, EntitiesConstants.TICKETS, gson, TicketEntity.class));
             return documentRepositoryWrapper;
         } else if ("ejdb".equals(dbName)){
-            EJDB2 client = new EJDBConfig().getClient();
-            DocumentRepositoryWrapper documentRepositoryWrapper = new DocumentRepositoryWrapper();
-            documentRepositoryWrapper.setAnimalRepository(new EjdbRepository<>(client, EntitiesConstants.ANIMALS, gson, AnimalEntity.class));
-            documentRepositoryWrapper.setEmployeesRepository(new EjdbRepository<>(client, EntitiesConstants.EMPLOYEES, gson, EmployeeEntity.class));
-            documentRepositoryWrapper.setTicketRepository(new EjdbRepository<>(client, EntitiesConstants.TICKETS, gson, TicketEntity.class));
-            return documentRepositoryWrapper;
+//            EJDB2 client = new EJDBConfig().getClient();
+//            DocumentRepositoryWrapper documentRepositoryWrapper = new DocumentRepositoryWrapper();
+//            documentRepositoryWrapper.setAnimalRepository(new EjdbRepository<>(client, EntitiesConstants.ANIMALS, gson, AnimalEntity.class));
+//            documentRepositoryWrapper.setEmployeesRepository(new EjdbRepository<>(client, EntitiesConstants.EMPLOYEES, gson, EmployeeEntity.class));
+//            documentRepositoryWrapper.setTicketRepository(new EjdbRepository<>(client, EntitiesConstants.TICKETS, gson, TicketEntity.class));
+//            return documentRepositoryWrapper;
+            return null;
         } else {
             throw new UnsupportedOperationException("No such database implemented");
         }

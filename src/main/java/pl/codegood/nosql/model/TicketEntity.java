@@ -5,6 +5,7 @@ import pl.codegood.nosql.model.enums.TicketTypeEnum;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 public class TicketEntity implements Serializable {
@@ -49,6 +50,18 @@ public class TicketEntity implements Serializable {
         return internalId;
     }
 
+    public void setInternalId(Long internalId) {
+        this.internalId = internalId;
+    }
+
+    public void setTicketTypeEnum(TicketTypeEnum ticketTypeEnum) {
+        this.ticketTypeEnum = ticketTypeEnum;
+    }
+
+    public void setBuyDateTime(LocalDateTime buyDateTime) {
+        this.buyDateTime = buyDateTime;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -73,5 +86,9 @@ public class TicketEntity implements Serializable {
                 ", price=" + price +
                 ", ticketTypeEnum=" + ticketTypeEnum +
                 '}';
+    }
+
+    public String toStringInsertStatement() {
+        return internalId + ", '" + buyDateTime.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME) + "', " + price + ", '" +ticketTypeEnum.toString()+"'";
     }
 }

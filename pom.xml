@@ -33,7 +33,11 @@
             <artifactId>aerospike-client</artifactId>
             <version>4.4.10</version>
         </dependency>
-
+        <dependency>
+            <groupId>com.datastax.cassandra</groupId>
+            <artifactId>cassandra-driver-core</artifactId>
+            <version>3.1.0</version>
+        </dependency>
         <dependency>
             <groupId>org.mongodb</groupId>
             <artifactId>mongo-java-driver</artifactId>
