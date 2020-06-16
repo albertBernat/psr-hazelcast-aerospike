@@ -4,6 +4,7 @@ import pl.codegood.nosql.demo.ApplicationContext;
 import pl.codegood.nosql.demo.column.ColumnDemo;
 import pl.codegood.nosql.demo.document.DocumentDemo;
 import pl.codegood.nosql.demo.keyvalue.KeyValueDemo;
+import pl.codegood.nosql.demo.object.ObjectDemo;
 
 public class Application {
 
@@ -15,6 +16,8 @@ public class Application {
             new ApplicationContext(new DocumentDemo()).performDemo(dbName);
         } else if ("cassandra".equals(dbName)) {
             new ApplicationContext(new ColumnDemo()).performDemo(dbName);
+        } else if ("objectbox".equals(dbName)) {
+            new ApplicationContext(new ObjectDemo()).performDemo(dbName);
         }
     }
 }

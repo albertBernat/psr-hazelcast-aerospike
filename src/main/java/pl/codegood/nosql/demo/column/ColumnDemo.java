@@ -27,7 +27,7 @@ public class ColumnDemo implements ApplicationAlgorithm {
 
         Showrun showrun = new ColumnShowrun(new ZooView(),cassandraAnimalRepository, cassandraTicketRepository, cassandraEmployeeRepository);
 //        showrun.animalCrudDemo();
-//        showrun.ticketCrudDemo();
+        showrun.ticketCrudDemo();
         showrun.employeeCrudDemo();
         client.close();
     }

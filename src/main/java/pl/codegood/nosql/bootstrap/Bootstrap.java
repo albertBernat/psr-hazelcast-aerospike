@@ -20,6 +20,7 @@ public interface Bootstrap {
 
     default Map<Long, TicketEntity> getTickets() {
         Map<Long, TicketEntity> tickets = new HashMap<>();
+        tickets.put(0L, new TicketEntity(0L, LocalDateTime.of(2020,2,2,13,2),new BigDecimal(20), TicketTypeEnum.FULL));
         tickets.put(1L, new TicketEntity(1L, LocalDateTime.of(2020,2,2,13,2),new BigDecimal(20), TicketTypeEnum.FULL));
         tickets.put(2L, new TicketEntity(2L,LocalDateTime.of(2020,2,2,12,1),new BigDecimal(20), TicketTypeEnum.JUNIOR));
         tickets.put(3L, new TicketEntity(3L,LocalDateTime.of(2020,2,3,11,11),new BigDecimal(20), TicketTypeEnum.JUNIOR));
@@ -33,6 +34,7 @@ public interface Bootstrap {
 
     default Map<Long, AnimalEntity> getAnimals() {
         Map<Long, AnimalEntity> animals = new HashMap<>();
+        animals.put(0L, new AnimalEntity(0L, "Joker", "Tiger", LocalDate.of(2000, 1, 2), null, null));
         animals.put(1L, new AnimalEntity(1L, "Joker", "Tiger", LocalDate.of(2000, 1, 2), null, null));
         animals.put(2L, new AnimalEntity(2L,"James", "Lion", LocalDate.of(2010, 1, 2), null, new LocationEntity("Building A", "A2", 12)));
         animals.put(3L, new AnimalEntity(3L,"Kundu", "Parrot", LocalDate.of(2020, 6, 2), null, null));
@@ -44,6 +46,7 @@ public interface Bootstrap {
 
     default Map<Long, EmployeeEntity> getEmployees() {
         Map<Long, EmployeeEntity> employees = new HashMap<>();
+        employees.put(0L, new EmployeeEntity(0L,"Gregory", "Jameson", LocalDate.of(2005,2,2),null, GenderEnum.MALE));
         employees.put(1L, new EmployeeEntity(1L,"Gregory", "Jameson", LocalDate.of(2005,2,2),null, GenderEnum.MALE));
         employees.put(2L, new EmployeeEntity(2L,"Johny", "Walker", LocalDate.of(2010,3,2),null, GenderEnum.MALE));
         employees.put(3L, new EmployeeEntity(3L,"Napoleon", "Bonaparte", LocalDate.of(2001,1,2),LocalDate.of(2006,5,1), GenderEnum.MALE));

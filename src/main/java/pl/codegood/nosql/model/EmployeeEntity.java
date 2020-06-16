@@ -1,5 +1,10 @@
 package pl.codegood.nosql.model;
 
+import io.objectbox.annotation.Convert;
+import io.objectbox.annotation.Entity;
+import io.objectbox.annotation.Id;
+import pl.codegood.nosql.model.converters.GenderEnumConverter;
+import pl.codegood.nosql.model.converters.LocalDateConverter;
 import pl.codegood.nosql.model.enums.GenderEnum;
 
 import java.io.Serializable;
@@ -7,12 +12,18 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
+@Entity
 public class EmployeeEntity implements Serializable {
+    @Id
+    private Long objectBoxId;
     private Long internalId;
     private String name;
     private String familyName;
+    @Convert(converter = LocalDateConverter.class, dbType = String.class)
     private LocalDate workStartDate;
+    @Convert(converter = LocalDateConverter.class, dbType = String.class)
     private LocalDate workEndDate;
+    @Convert(converter = GenderEnumConverter.class, dbType = String.class)
     private GenderEnum gender;
 
     public EmployeeEntity(String name, String familyName, LocalDate workStartDate, LocalDate workEndDate, GenderEnum gender) {
@@ -103,7 +114,8 @@ public class EmployeeEntity implements Serializable {
     @Override
     public String toString() {
         return "EmployeeEntity{" +
-                "internalId=" + internalId +
+                "objectBoxId=" + objectBoxId +
+                ", internalId=" + internalId +
                 ", name='" + name + '\'' +
                 ", familyName='" + familyName + '\'' +
                 ", workStartDate=" + workStartDate +
@@ -118,5 +130,13 @@ public class EmployeeEntity implements Serializable {
 
     public String parseDate(LocalDate date) {
         return date == null ? "null":"'"+date.format(DateTimeFormatter.BASIC_ISO_DATE)+"'";
+    }
+
+    public Long getObjectBoxId() {
+        return objectBoxId;
+    }
+
+    public void setObjectBoxId(Long objectBoxId) {
+        this.objectBoxId = objectBoxId;
     }
 }

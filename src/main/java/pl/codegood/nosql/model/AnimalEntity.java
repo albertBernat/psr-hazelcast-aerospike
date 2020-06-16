@@ -1,16 +1,30 @@
 package pl.codegood.nosql.model;
 
+import io.objectbox.annotation.Convert;
+import io.objectbox.annotation.Entity;
+import io.objectbox.annotation.Id;
+import pl.codegood.nosql.model.converters.LocalDateConverter;
+import pl.codegood.nosql.model.converters.LocationEntityConverter;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
 
+@Entity
 public class AnimalEntity implements Serializable {
+
+    @Id
+    private Long objectBoxId;
+
     private Long internalId;
     private String name;
     private String race;
+    @Convert(converter = LocalDateConverter.class, dbType = String.class)
     private LocalDate birthDate;
+    @Convert(converter = LocalDateConverter.class, dbType = String.class)
     private LocalDate deathDate;
+    @Convert(converter = LocationEntityConverter.class, dbType = String.class)
     private LocationEntity location;
 
     public AnimalEntity(String name, String race, LocalDate birthDate, LocalDate deathDate, LocationEntity location) {
@@ -65,6 +79,14 @@ public class AnimalEntity implements Serializable {
         this.internalId = internalId;
     }
 
+    public Long getObjectBoxId() {
+        return objectBoxId;
+    }
+
+    public void setObjectBoxId(Long objectBoxId) {
+        this.objectBoxId = objectBoxId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -86,7 +108,8 @@ public class AnimalEntity implements Serializable {
     @Override
     public String toString() {
         return "AnimalEntity{" +
-                "internalId=" + internalId +
+                "objectBoxId=" + objectBoxId +
+                ", internalId=" + internalId +
                 ", name='" + name + '\'' +
                 ", race='" + race + '\'' +
                 ", birthDate=" + birthDate +
