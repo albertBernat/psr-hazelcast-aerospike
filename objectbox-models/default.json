@@ -1,0 +1,171 @@
+{
+  "_note1": "KEEP THIS FILE! Check it into a version control system (VCS) like git.",
+  "_note2": "ObjectBox manages crucial IDs for your object model. See docs for details.",
+  "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
+  "entities": [
+    {
+      "id": "3:2956719960096371879",
+      "lastPropertyId": "7:8203398936038667909",
+      "name": "EmployeeEntity",
+      "properties": [
+        {
+          "id": "1:8288605731003185887",
+          "name": "internalId",
+          "type": 6,
+          "flags": 2
+        },
+        {
+          "id": "2:5360873132896105958",
+          "name": "name",
+          "type": 9
+        },
+        {
+          "id": "3:2052576920852456458",
+          "name": "familyName",
+          "type": 9
+        },
+        {
+          "id": "4:8105905680731201135",
+          "name": "workStartDate",
+          "type": 9
+        },
+        {
+          "id": "5:3366441568811551093",
+          "name": "workEndDate",
+          "type": 9
+        },
+        {
+          "id": "6:8094135784941109199",
+          "name": "gender",
+          "type": 9
+        },
+        {
+          "id": "7:8203398936038667909",
+          "name": "objectBoxId",
+          "type": 6,
+          "flags": 3
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "6:8552078702149685143",
+      "lastPropertyId": "5:657099056165254376",
+      "name": "TicketEntity",
+      "properties": [
+        {
+          "id": "1:1476574051088321176",
+          "name": "objectBoxId",
+          "type": 6,
+          "flags": 3
+        },
+        {
+          "id": "2:3322490964291977053",
+          "name": "internalId",
+          "type": 6,
+          "flags": 2
+        },
+        {
+          "id": "3:8198976151843569520",
+          "name": "buyDateTime",
+          "type": 9
+        },
+        {
+          "id": "4:3893801216068679833",
+          "name": "price",
+          "type": 9
+        },
+        {
+          "id": "5:657099056165254376",
+          "name": "ticketTypeEnum",
+          "type": 9
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "7:3173350955807183748",
+      "lastPropertyId": "7:644450395137864082",
+      "name": "AnimalEntity",
+      "properties": [
+        {
+          "id": "1:3690470827323589520",
+          "name": "objectBoxId",
+          "type": 6,
+          "flags": 3
+        },
+        {
+          "id": "2:4137208134055042590",
+          "name": "internalId",
+          "type": 6,
+          "flags": 2
+        },
+        {
+          "id": "3:345992877036123525",
+          "name": "name",
+          "type": 9
+        },
+        {
+          "id": "4:6903846228836291603",
+          "name": "race",
+          "type": 9
+        },
+        {
+          "id": "5:2797312386235713335",
+          "name": "birthDate",
+          "type": 9
+        },
+        {
+          "id": "6:2010814141217112216",
+          "name": "deathDate",
+          "type": 9
+        },
+        {
+          "id": "7:644450395137864082",
+          "name": "location",
+          "type": 9
+        }
+      ],
+      "relations": []
+    }
+  ],
+  "lastEntityId": "7:3173350955807183748",
+  "lastIndexId": "0:0",
+  "lastRelationId": "0:0",
+  "lastSequenceId": "0:0",
+  "modelVersion": 5,
+  "modelVersionParserMinimum": 5,
+  "retiredEntityUids": [
+    6554476415592284747,
+    6316521087810025167,
+    6034396305474027292,
+    6912847986897740530
+  ],
+  "retiredIndexUids": [],
+  "retiredPropertyUids": [
+    5623756326580737241,
+    180279141836061140,
+    6906669166079681504,
+    30447312441678977,
+    2808644011271637117,
+    6477861405033966519,
+    3412994680971559767,
+    6275838578831259692,
+    1194452382233678584,
+    213471762096602691,
+    5800957978854221281,
+    3813713334096055441,
+    2821083869162039363,
+    8049141584695199662,
+    6905452379182345246,
+    3810238592858581571,
+    7589151837561439267,
+    4944384271837510625,
+    6612854087119518886,
+    7134159828703379971,
+    7738362348541267349,
+    7086317192266040575
+  ],
+  "retiredRelationUids": [],
+  "version": 1
+}
