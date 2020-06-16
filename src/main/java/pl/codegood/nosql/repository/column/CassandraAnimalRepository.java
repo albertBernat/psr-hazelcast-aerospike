@@ -102,7 +102,7 @@ public class CassandraAnimalRepository implements ZooColumnRepository<AnimalEnti
 
     @Override
     public Collection<AnimalEntity> getAllAliveAnimals() {
-        String query = "SELECT * FROM " + tableName + " WHERE deathDate IS NULL";
+        String query = "SELECT * FROM " + tableName + " WHERE deathDate='null' ALLOW FILTERING;";
         ResultSet execute = cassandraSession.execute(query);
         ArrayList<AnimalEntity> aliveAnimals = new ArrayList<>();
         execute.forEach(result -> aliveAnimals.add(getAnimalEntityFromResultSetRow(result)));
@@ -111,7 +111,7 @@ public class CassandraAnimalRepository implements ZooColumnRepository<AnimalEnti
 
     @Override
     public Collection<AnimalEntity> getAllCats() {
-        String query = "SELECT * FROM " + tableName + " WHERE race='cat'";
+        String query = "SELECT * FROM " + tableName + " WHERE race='Cat' ALLOW FILTERING";
         ResultSet execute = cassandraSession.execute(query);
         ArrayList<AnimalEntity> cats = new ArrayList<>();
         execute.forEach(result -> cats.add(getAnimalEntityFromResultSetRow(result)));

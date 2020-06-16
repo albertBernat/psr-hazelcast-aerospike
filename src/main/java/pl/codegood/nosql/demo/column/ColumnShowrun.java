@@ -114,7 +114,16 @@ public class ColumnShowrun implements Showrun {
 
     @Override
     public void predicatesDemo() throws InterruptedException {
+        zooView.displayOperationTitle("PREDICATES DEMO");
+        TimeUnit.SECONDS.sleep(EntitiesConstants.SLEEP_DURATION_IN_SECONDS);
 
+        zooView.displayOperationTitle("ALL ALIVE ANIMALS");
+        zooView.displayCollection(this.animalRepository.getAllAliveAnimals());
+        TimeUnit.SECONDS.sleep(EntitiesConstants.SLEEP_DURATION_IN_SECONDS);
+
+        zooView.displayOperationTitle("ALL CATS");
+        zooView.displayCollection(this.animalRepository.getAllCats());
+        TimeUnit.SECONDS.sleep(EntitiesConstants.SLEEP_DURATION_IN_SECONDS);
     }
 
     @Override

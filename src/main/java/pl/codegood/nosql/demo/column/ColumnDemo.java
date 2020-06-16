@@ -26,9 +26,10 @@ public class ColumnDemo implements ApplicationAlgorithm {
         dataBootstrap.loadEmplyees();
 
         Showrun showrun = new ColumnShowrun(new ZooView(),cassandraAnimalRepository, cassandraTicketRepository, cassandraEmployeeRepository);
-//        showrun.animalCrudDemo();
+        showrun.animalCrudDemo();
         showrun.ticketCrudDemo();
         showrun.employeeCrudDemo();
+        showrun.predicatesDemo();
         client.close();
     }
 }
